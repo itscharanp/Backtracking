@@ -1,0 +1,77 @@
+package practice;
+import java.util.*;
+class Practice {
+    
+     static int arr[][];
+    
+    public static void placequeens(int n)
+    {
+       arr = new int[n][n];
+       nqueenhelper(n,0);
+    }
+    public static void nqueenhelper(int n, int row)
+    {
+          if(row == n)
+          {
+              for(int i=0;i<n;i++)
+              {
+                  for(int j=0;j<n;j++)
+                  {
+                      System.out.print(arr[i][j]+ " ");
+                  }
+                    System.out.println();
+              }  
+              System.out.println();
+          }
+          
+          for(int j=0;j<n;j++)
+          {
+              if(isPossible(n,row,j))
+              {
+                  arr[row][j] = 1;
+                  nqueenhelper(n,row+1);
+                  arr[row][j] = 0;
+                  
+              }
+          }  
+    }
+    public static  boolean isPossible(int n,int row,int col)
+    {
+     
+        for(int i=row-1;i>=0;i--)
+        {
+            if(arr[i][col] == 1)
+            {
+                return false;
+            }
+        }
+        for(int k=row-1,j=col-1;k>=0&&j>=0;k--,j--)
+        {
+            if(arr[k][j] == 1)
+            {
+                return false;
+            }
+        }
+        for(int k=row-1,j=col+1;j<n&&k>=0;k--,j++)
+        {
+           if(arr[k][j] == 1)
+           {
+               return false;
+           }
+        }
+        return true;
+    }
+    
+    
+   public static void main(String args[]){
+  
+    Scanner in = new Scanner(System.in);
+    int nq = in.nextInt();
+    placequeens(nq);
+    
+    
+  
+   }
+}
+
+
